@@ -1,2 +1,2 @@
 # Rift
-Rift is a Ad Free Web Song Player currently in beta mode, it is still in development and barely has enough songs to be released. I am hoping to fix this shortcoming in later releases. Additionally, there are slight issues with the playlists , but the feature is functional
+Rift is a Ad Free Web Song Player currently in beta mode, it is still in development and barely has enough songs to be released. I am hoping to fix this shortcoming in later releases. Additionally, there are slight issues to do with the order of songs in playlists, and a bug that makes it so that sometimes your playlist's songs randomly switch to songs out of the playlist , and there is also not that much variety in the songs  , but the player is functional
