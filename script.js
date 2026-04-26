@@ -27,11 +27,6 @@ async function loadSongs() {
 
         if (error) throw error;
 
-        if (!data || data.length === 0) {
-            console.warn("Database connected, but the 'songs' table is empty.");
-            return;
-        }
-
         songs = data.map(row => ({
             song: row.title,
             album: row.album,
@@ -47,9 +42,7 @@ async function loadSongs() {
         } else {
             setSong(0, false);
         }
-        
         loadPage('home');
-        console.log("Songs loaded successfully:", songs);
     } catch (err) {
         console.error('Connection failed:', err.message);
     }
