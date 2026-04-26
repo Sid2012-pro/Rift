@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', () => {
     setupPlayerControls();
     loadSongs();
 });
-const supabase = supabase.createClient('YOUR_PROJECT_URL', 'YOUR_ANON_KEY');
+const supabase = supabase.createClient('https://vjhejqbcajtuclbfahhf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZqaGVqcWJjYWp0dWNsYmZhaGhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTA3NDAsImV4cCI6MjA5MDg2Njc0MH0.wRdcJJi68TkiziDjkxmLdl-H5kFMbNZmIefoRKMQhxg');
 async function loadSongs() {
     try {
         const { data, error } = await supabase
