@@ -17,18 +17,15 @@ window.addEventListener('DOMContentLoaded', () => {
     setupPlayerControls();
     loadSongs();
 });
-const SUPABASE_URL = 'https://vjhejqbcajtuclbfahhf.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZqaGVqcWJjYWp0dWNsYmZhaGhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTA3NDAsImV4cCI6MjA5MDg2Njc0MH0.wRdcJJi68TkiziDjkxmLdl-H5kFMbNZmIefoRKMQhxg';
-
+const supabase = supabase.createClient('YOUR_PROJECT_URL', 'YOUR_ANON_KEY');
 async function loadSongs() {
     try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/songs?select=*&order=created_at.asc`, {
-            headers: {
-                'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`
-            }
-        });
-        const data = await res.json();
+        const { data, error } = await supabase
+            .from('songs')
+            .select('*')
+            .order('title', { ascending: true });
+
+        if (error) throw error;
 
         songs = data.map(row => ({
             song: row.title,
@@ -37,7 +34,6 @@ async function loadSongs() {
             image: row.image_url,
             audioSrc: row.audio_url
         }));
-
         const saved = JSON.parse(localStorage.getItem('rift_player_state'));
         if (saved && songs[saved.index]) {
             currentIndex = saved.index;
@@ -47,12 +43,11 @@ async function loadSongs() {
             }, { once: true });
         } else {
             setSong(0, false);
-        }
-
         loadPage('home');
     } catch (err) {
-        console.error('Failed to load songs:', err);
+        console.error('Connection failed:', err.message);
     }
+}
 }
 function setSong(index, andPlay = true) {
     if (!songs[index]) return;
