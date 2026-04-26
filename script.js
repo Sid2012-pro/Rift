@@ -34,6 +34,7 @@ async function loadSongs() {
             image: row.image_url,
             audioSrc: row.audio_url
         }));
+
         const saved = JSON.parse(localStorage.getItem('rift_player_state'));
         if (saved && songs[saved.index]) {
             currentIndex = saved.index;
@@ -43,11 +44,11 @@ async function loadSongs() {
             }, { once: true });
         } else {
             setSong(0, false);
+        }
         loadPage('home');
     } catch (err) {
         console.error('Connection failed:', err.message);
     }
-}
 }
 function setSong(index, andPlay = true) {
     if (!songs[index]) return;
